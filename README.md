@@ -1,2 +1,2 @@
-# Launch-Anyting-0.1.0
+# Launch-Anything-0.1.0
 Very Useful Virtual Operating System

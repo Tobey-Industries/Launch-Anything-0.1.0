@@ -1,3 +1,4 @@
+#704 (3)
 import os
 import time
 import socket
@@ -36,43 +37,19 @@ Options:
 [26] Hack websites
 """)
 while True:
-        opt = input("Option: ")
-        with open("log", "w")as f:
-                osdevice = socket.gethostname()
-                ip = socket.gethostbyname(osdevice)
-                filedata = open("log")
-                usable = filedata.read()
-                f.writelines(usable + "\n" + "Date: " + time.strftime("%m/%d/%y") + " OS: " + os.name + " " + "Device: " + osdevice + " IP: " + ip)
-                filedata = open("log")
-                usable = filedata.read()                  
+        opt = input("Option: ")                  
         if opt == "1":
                 run = input("Run: ")
                 os.startfile(run)
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                	usable = filedata.read()
         if opt == "2":
                 fillew = input("File: ")
                 os.system("python3 " + filew)
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-					filedata = open("log")
-					usable = filedata.read()
         if opt == "3":
                 filewa = input("File: ")
                 os.system("python" + filewa)
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "4":
                 filewan = input("File: ")
                 os.system("python" + filewan)
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "14":
                 out = input("""
 0 = Black       8 = Gray
@@ -85,25 +62,13 @@ while True:
     7 = White       F = Bright White
                 """)
                 os.system("color " + out + "0")
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "24":
                 ping = input("Website: ")
                 os.system("ping " + ping)
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "25":
                 import webbrowser
                 web = input("Go to: ")
                 webbrowser.web()
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "26":
                 import requests
                 print("""
@@ -131,71 +96,26 @@ while True:
                 print("\n")
                 print("LAT/LONG")
                 print("Location:", response['loc'])
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "13":
                 os.system("cmd")
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "16":
                 tit = input("Title: ")
                 os.system("title " + tit)
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "15":
                 coc = input("Color: ")
                 os.system("color " + coc)
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "17":
                 os.startfile("Notepad")
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "18":
                 os.startfile("explorer")
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "19":
                 os.startfile("write")
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "20":
                 os.startfile("winver")
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "21":
                 os.startfile("REGEDIT")
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "22":
                 os.startfile("taskmgr")
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
         if opt == "23":
                 kill = input("Kill: ")
                 os.system("taskkill /IM " + kill)
-                with open("log", "w")as f:
-                	f.writelines(usable + "\n" + opt + "\n")
-                	filedata = open("log")
-                    usable = filedata.read()
-                

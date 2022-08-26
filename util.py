@@ -2,10 +2,15 @@
 import os
 import time
 import socket
+import platform as system
+print(system, os.name)
+print(time.strftime("20%y-%m-%d"))
+print(socket.gethostname())
+print(socket.gethostbyname(socket.gethostname())
+pprint("Welcome to Launch Anything!")
 os.system("title Launch Anything")
 os.system("color 10")
 print("""
-Welcome to Launch Anything!
 
 Options:
 
@@ -35,9 +40,12 @@ Options:
 [24] Diagnose websites
 [25] Go to websites
 [26] Hack websites
+[27] Clear Screen
 """)
 while True:
-        opt = input("Option: ")                  
+        opt = input("Option: ")  
+        if opt == "27":
+            os.system("cls")                
         if opt == "1":
                 run = input("Run: ")
                 os.startfile(run)
@@ -50,6 +58,8 @@ while True:
         if opt == "4":
                 filewan = input("File: ")
                 os.system("python" + filewan)
+        if opt == "9":
+                os.system("pip install pyinstaller")
         if opt == "14":
                 out = input("""
 0 = Black       8 = Gray

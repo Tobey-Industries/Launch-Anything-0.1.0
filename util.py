@@ -1,37 +1,57 @@
 import os
+import shutil
+import time
+import socket
+import logging
+date = time.strftime("%m-%d-20%y")
+hostName = socket.gethostname()
+hostIP = socket.gethostbyname(hostName)
+userprofile = os.environ ['USERPROFILE']
+osutildir = f"{userprofile}\AppData\LocalLow\osutil" 
+userspl = f"{osutildir}\sysUsers.txt"
+logpl = f"{osutildir}\{hostName}.txt"
+try:
+  logging.basicConfig(filename =logpl,
+                      level =logging.DEBUG)
+except FileNotFoundError:
+  with open(logpl, "w")as f:
+    f.writelines("")
+  logging.basicConfig(filename =logpl,
+                      level =logging.DEBUG)  
+  logging.info(" Did not find system log.")
+  
 primos = "nt"
 oscheck = True
 debugsys = True
 scrh = False
 nocolor = False
-usersdir = 'C:\osutil\sysUsers.txt'
 try: 
-  userpl = open(usersdir)
+  userpl = open(userspl)
 except FileNotFoundError:
-  with open(usersdir, "w")as f: f.writelines("@")
+  with open(userspl, "w")as f: f.writelines("@")
 while True:
-  userpl = open("C:\osutil\sysUsers.txt")
-  print(f"Current Users: {userpl.read()} Guest")
+  userpl = open(userspl)
+  print(f"Current Users:{userpl.read()} Guest")
   current_user = input("User: ")
   if current_user == "Guest" or current_user == "guest":
     print("Welcome Guest!")
-    os.system(f"cd C:\osutil\{current_user}")
+    os.system(f"cd {userprofile}\AppData\LocalLow\osutil\Guest")
     break
   else:
-    try: 
-      userrpl = open(f"C:\osutil\{current_user}\sysUser.txt")
+    try:
+      current_user_dir = f"{userprofile}\AppData\LocalLow\osutil\{current_user}"
+      userrpl = open(f"{current_user_dir}\sysUser.txt")
       user = userrpl.read()
-      os.system(f"cd C:\osutil\{current_user}")
-      passwordfd = open(f"C:\osutil\{current_user}\pass.txt")
+      passwordfd = open(f"{current_user_dir}\pass.txt")
       password = passwordfd.read()
-      passtes = input("Password to {current_user}: ")
+      passtes = input(f"Password to {current_user}: ")
       if passtes == password:
         print(f"Welcome {current_user}")
         break
       else:
         print("Wrong Password!")
     except FileNotFoundError: 
-      input("Invalid User")
+      input(f"Invalid User {current_user_dir}")
 try: 
   import time
   loc = open("config.util")
@@ -45,8 +65,19 @@ try:
   elif fin == "--fileopen":
     run = input("Run:")
     try: os.startfile(run)
-    except FileNotFoundError: print("Invalid File")
-    except OSError: print("Invalid File Content")
+    except FileNotFoundError:
+      logging.basicConfig(filename =logpl,
+                          level =logging.DEBUG)
+      print("Invalid File")
+      logging.error(f" FileNotFoundError at date: {date}. When opening: {run}. Using: StartRun")
+      logp = open(logpl) 
+    except OSError:
+      print("Invalid File Content")
+      logging.basicConfig(filename =logpl,
+                          level =logging.DEBUG)
+      print("Invalid Content")
+      logging.error(f" OSError at date: {date}. When opening: {run}. Using: StartRun")
+      logp = open(logpl)       
     time.sleep(int(10))
   elif fin == "--display-date":
     import time
@@ -61,7 +92,7 @@ try:
         passwordt = input(f"Old password to: {current_user}")
         if passwordt == password:
           password = input("New Password: ")
-          with open(f"C:\osutil\{current_user}\pass.txt", "w")as f:
+          with open(f"{userprofile}\AppData\LocalLow\osutil\{current_user}\pass.txt", "w")as f:
             f.writelines(password)
           print("Password Successfully Edited!")
           break
@@ -75,9 +106,7 @@ try:
         if passwordtn == password:
           old_user = current_user
           current_user = input("New Username:")
-          input("Doing this operation will delete all your Launch Anything files, So please backup!")
-          input("Are you sure?")
-          os.system(f"ren C:/osutil/{old_user} C:/osutil/{current_user}")
+          shutil.move(f"{userprofile}\AppData\LocalLow\osutil\{old_user}" + dst(f"%userprofile%\AppData\LocalLow\osutil\{current_user}"))
           print("Username Successfully Edited!")
           break
         else:
@@ -96,12 +125,8 @@ if oscheck:
     print("Exiting...")
     time.sleep(int(20))
     exit()
-import time
-import socket
+
 import platform as system
-date = time.strftime("%m-%d-20%y")
-hostName = socket.gethostname()
-hostIP = socket.gethostbyname(hostName)
 if debugsys:
   print(system, os.name)
   print(date)
@@ -113,8 +138,12 @@ print("Welcome to Launch Anything!")
 os.system("title Launch Anything")
 print("Please Wait...")
 os.system("@echo off && pip install psutil && @echo off && pip install wolframalpha ")
-if nocolor: os.system("color") 
+if nocolor: os.system("color")
 else: os.system("color B0")
+logging.basicConfig(filename =logpl,
+                    level =logging.DEBUG)
+ 
+
 print("""
 
 Options:
@@ -145,8 +174,10 @@ Options:
 [31] Display IP & Device Name
 [Ctrl+Z] Exit Launch Anything
 """)
+logging.info(f" Successfully Started at: {date}")
 while True:
-        opt = input("Option: ")  
+        opt = input("Option: ")
+        logging.debug(f" Ran option: {opt}")
         if opt == "27":
             os.system("cls")
             print("""
@@ -315,7 +346,7 @@ Options:
                 filnam = input("New File: ")
                 os.system(f"notepad C:\osutil\{current_user}\{filnam}")
         if opt == "18":
-                os.system(f"explorer C:\osutil\{current_user}")
+                os.system(f"explorer {current_user_dir}")
         if opt == "19":
                 os.startfile("write")
         if opt == "20":

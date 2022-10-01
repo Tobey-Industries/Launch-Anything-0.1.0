@@ -1,9 +1,9 @@
-import os
+﻿import os
 import shutil
 import time
 import socket
 import logging
-date = time.strftime("%m-%d-20%y")
+date = time.strftime('%B-%d-%Y %I:%M %p')
 hostName = socket.gethostname()
 hostIP = socket.gethostbyname(hostName)
 userprofile = os.environ ['USERPROFILE']
@@ -11,14 +11,13 @@ osutildir = f"{userprofile}\AppData\LocalLow\osutil"
 userspl = f"{osutildir}\sysUsers.txt"
 logpl = f"{osutildir}\{hostName}.txt"
 try:
-  logging.basicConfig(filename =logpl,
-                      level =logging.DEBUG)
+  testrun = open(logpl)
 except FileNotFoundError:
   with open(logpl, "w")as f:
     f.writelines("")
   logging.basicConfig(filename =logpl,
                       level =logging.DEBUG)  
-  logging.info(" Did not find system log.")
+  logging.info(f" {primos} {hostName} Did not find system log.")
   
 primos = "nt"
 oscheck = True
@@ -47,11 +46,25 @@ while True:
       passtes = input(f"Password to {current_user}: ")
       if passtes == password:
         print(f"Welcome {current_user}")
+        logging.basicConfig(filename =logpl,
+                            level =logging.INFO) 
+        logging.info( current_user_dir)         
         break
       else:
         print("Wrong Password!")
+        logging.basicConfig(filename =logpl,
+                            level =logging.ERROR) 
+        logging.error(f" Wrong Password to {current_user_dir}: {passtes}|{date} {hostIP}")     
     except FileNotFoundError: 
       input(f"Invalid User {current_user_dir}")
+      logging.basicConfig(filename =logpl,
+                          level =logging.WARNING) 
+      logging.info(f" Invalid user {current_user_dir}|{date} {hostIP}")     
+    except OSError:
+      input(f"Do not open a full directory! {current_user}")
+      logging.basicConfig(filename =logpl,
+                          level =logging.WARNING)
+      logging.warning(f" Used a full path. Date: {date} Host IP: {hostIP} Chosen full path: {current_user}")
 try: 
   import time
   loc = open("config.util")
@@ -69,14 +82,14 @@ try:
       logging.basicConfig(filename =logpl,
                           level =logging.DEBUG)
       print("Invalid File")
-      logging.error(f" FileNotFoundError at date: {date}. When opening: {run}. Using: StartRun")
+      logging.error(f"  {primos} {hostName} FileNotFoundError at date: {date}. When opening: {run}. Using: StartRun")
       logp = open(logpl) 
     except OSError:
       print("Invalid File Content")
       logging.basicConfig(filename =logpl,
                           level =logging.DEBUG)
       print("Invalid Content")
-      logging.error(f" OSError at date: {date}. When opening: {run}. Using: StartRun")
+      logging.error(f"  {primos} {hostName} OSError at date: {date}. When opening: {run}. Using: StartRun")
       logp = open(logpl)       
     time.sleep(int(10))
   elif fin == "--display-date":
@@ -144,7 +157,7 @@ logging.basicConfig(filename =logpl,
                     level =logging.DEBUG)
  
 
-print("""
+print(f"""
 
 Options:
 
@@ -171,10 +184,14 @@ Options:
 [28] Run Dreamco
 [29] Go to youtube.com
 [30] Go to bing.com
-[31] Display IP & Device Name
+[31] Display IP , Device Name , Current {primos} User , Current Launch Anything User 
+[32] Display IP
+[33] Display Device Name
+[34] Display Current {primos} User
+[35] Display Current Launch Anything User
 [Ctrl+Z] Exit Launch Anything
 """)
-logging.info(f" Successfully Started at: {date}")
+logging.info(f" {primos} {hostName} Successfully Started at: {date}")
 while True:
         opt = input("Option: ")
         logging.debug(f" Ran option: {opt}")

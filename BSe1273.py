@@ -1,3 +1,4 @@
+#Update BSe1273"12/31/2022 8:58"
 ﻿import os
 import shutil
 import time
@@ -16,49 +17,8 @@ allsyspaths = os.environ['Path']
 sysusrname = os.environ['USERNAME']
 def do(): 
   time.sleep(float(0.40))
-all_info = [date + " " + hostName + ' ' + hostIP + " " + userprofile + " " + osn + " " + windir + " " + processor + " " +  architecture + " " + processors + " " + allsyspaths + " " + sysusrname]
-try:
-  customize_addon_exep = open(windir + "\customize_system.py")
-except UnicodeError:
-  print("|__/")
-except FileNotFoundError:
-  with open(windir + "\customize_system.py", "w")as f: f.writelines("""
-import os
-os.system("color B0 && Title Add-on")
-print("Welcome To The Settings Editor For Launch Anything")
-opt_one = input("[1]Delete Old Settings | [2]Make a New Setting")
-confdir = "config.util"
-def linux_mode():
-  with open(confdir, "w")as f: f.writelines("--primary-os-linux")
-def file_open():
-  with open(confdir, "w")as f: f.writelines("--fileopen")
-def no_sys_check():
-  with open(confdir, "w")as f: f.writelines("--no-sys-check")
-def display_date():
-  with open(confdir, "w")as f: f.writelines("--display-date")
-def no_color():
-  with open(confdir, "w")as f: f.writelines("--no-color")
-def no_spec():
-  with open(confdir, "w")as f: f.writelines("--no-spec")
-def update_sys_pass():
-  with open(confdir, "w")as f: f.writelines("--update-sys-pass")
-def update_sys_username():
-  with open(confdir, "w")as f: f.writelines("update-sys-username")
-if opt_one == "1":
-  os.system("del config.util")
-  input("Press<ENTER>To Exit.")
+all_info = [date + " " + hostName + ' ' + hostIP + " " + userprofile + " " + osn + " " + windir + " " + processor + " " +  architecture + " " + processors]
 
-  """)
-  os.system("pip install pyinstaller")
-  os.system(f"pyinstaller {windir}\customize_system.py")
-  os.system(f"pyinstaller -F {windir}\customize_system.py")
-  os.system(f"pyinstaller {windir}\customize_system.py -F")
-  shutil.move(f"{windir}\dist\customize_system.exe", f"{windir}\customize_system.exe")
-except PermissionError:
-  print("Please Switch To Admin When running this app.")
-osutildir = f"{userprofile}\AppData\LocalLow\osutil"
-userspl = f"{osutildir}\sysUsers.txt"
-logpl = f"{osutildir}\{hostName}.txt"
 try:
   testrun = open(logpl)
 except FileNotFoundError:

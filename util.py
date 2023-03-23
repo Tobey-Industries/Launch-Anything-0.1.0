@@ -23,14 +23,8 @@ osutildir = env("APPDATA")+"\\..\\LocalLow\\osutil"
 logfile = f"{osutildir}\\{socket.gethostname()}.txt"
 logpl = logfile
 clock = time.strftime('%B-%d-%Y %I:%M %p')
-def log(logfile, info):
-  try:
-    with open(logfile, "a")as f: f.write("\n"+clock+"|"+info)
-  except UnicodeError:
-    with open(logfile, "ab")as f: f.write(bytes("\n", encoding = "ansi")+bytes(clock, encoding = "utf8")+bytes(info))
-  except FileNotFoundError: 
-    print("--LogFile Error--\nThe system cannot find the path specified.")
-    error("FileNotFoundError", "log()")  
+
+
 def error(desc, function):
   log(logpl, f"\n--Potted error--\nDescription: {desc}\nFunction: {function}\n")
   ws = Tk()
@@ -38,10 +32,10 @@ def error(desc, function):
   ws.title('Attention')
   img = PhotoImage(file="C:\\Users\\Omar Ismail\\AppData\\LocalLow\\osutil\\Error.png")
   Label(ws, image=img).pack(side = LEFT)
-  Label(ws, text="The command done an illegal operation and was shut down.\nReinstalling this feature may help.", font="Cascadia 30", foreground="red").pack(side = RIGHT)
-  Button(ws, text="OK",command=ws.destroy, font="Cascadia 30").pack(side=BOTTOM)
+  Label(ws, text="The command done an illegal operation and was shut down.\nReinstalling this feature may help.", font="Cascadia 10", foreground="red", background="white").pack(side = RIGHT)
+  Button(ws, text="OK",command=ws.destroy, font="Cascadia 5").pack(side=BOTTOM)
   root = ws
-  root.geometry("500x768")
+  root.geometry("1024x768")
   scrollbar = Scrollbar(root)
  
   scrollbar.pack( side = RIGHT, fill = Y )
@@ -56,7 +50,17 @@ def error(desc, function):
   mylist.pack( side = LEFT, fill = BOTH )
   scrollbar.config( command = mylist.yview )
   ws.mainloop()
-error("desc", "func")
+def log(logfile, info):
+  try:
+    with open(logfile, "a")as f: f.write("\n"+clock+"|"+info)
+  except UnicodeError:
+    with open(logfile, "ab")as f: f.write(bytes("\n", encoding = "ansi")+bytes(clock, encoding = "utf8")+bytes("|", encoding="utf8")+bytes(info, encoding = "utf8"))
+  except UnicodeEncodeError:
+    with open(logfile, "ab")as f: f.write(bytes("\n", encoding = "ansi")+bytes(clock, encoding = "utf8")+bytes("|", encoding="utf8")+bytes(info, encoding = "utf8"))
+  except FileNotFoundError: 
+    print("--LogFile Error--\nThe system cannot find the path specified.")
+    error("FileNotFoundError", "log()")
+
 time.sleep(0.90)
 os.system("cls")
 print("""
@@ -155,7 +159,7 @@ def uac(func, ticket, forced):
                 os.system("pause")
             def button_command_right_with_password():
                       global status
-                      key = 'your key'
+                      key = "your key"
                       fernet = Fernet(key)
                       fil = open(current_user_dir+"\\pass.txt", "rb")
                       passenc = fil.read()

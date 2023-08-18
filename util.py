@@ -294,7 +294,7 @@ while True:
         else: opt = input(f"{current_user}@{hostName}: ")
         logging.debug(f" {tiny_info} {date} {sysusrname} {current_user_dir} Ran option: {opt}")
         if opt == "27": os.system("cls")
-        elif opt == "36": print("Utility Kernel 0.2.0-1.0.0\nCopyright (C) OR 2023")
+        elif opt == "36": print("Utility Kernel 0.2.0-1.0.0\nCopyright (C) TE 2023")
         elif opt == "33":
           sound = input("File or Website: ")
           if sound[0] == '"' and sound[int(len(sound))-1] == '"': sound = sound[1:int(len(sound))-1]
@@ -306,7 +306,7 @@ while True:
         elif opt == "35":
           import tkinter
           window = tkinter.Tk()
-          tkinter.Label(window,text = "Copyight (C) O. Republic\n Copyright (C) Tobey Industries\n 2022-2023").pack()
+          tkinter.Label(window,text = "Copyight (C) Tobey Enterprises\nCopyright (C) Tobey Industries\n 2022-2023").pack()
           tkinter.Label(window,text="Shell Version: "+shellbuild).pack()
           tkinter.Label(window,text="Kernel Version: "+kernbuild).pack()
           tkinter.Button(window,text="OK", command = window.destroy).pack()

@@ -36,7 +36,7 @@ def error(desc, function):
   ws = Tk()
   ws.config(background="white")
   ws.title('Attention')
-  img = PhotoImage(file="C:\\Users\\Omar Ismail\\AppData\\LocalLow\\osutil\\Error.png")
+  img = PhotoImage(file=osutildir+"\\Error.png")
   Label(ws, image=img).pack(side = LEFT)
   Label(ws, text="The command done an illegal operation and was shut down.\nReinstalling this feature may help.", font="Cascadia 30", foreground="red").pack(side = RIGHT)
   Button(ws, text="OK",command=ws.destroy, font="Cascadia 30").pack(side=BOTTOM)
@@ -73,7 +73,7 @@ processors = os.environ['NUMBER_OF_PROCESSORS']
 allsyspaths = os.environ['Path']
 sysusrname = os.environ['USERNAME']
 kernbuild = "UTIL Kernel 0.2.0(2023 Kernel)"
-copyright = "Copyright(c) O. Republic 2023"
+copyright = "Copyright(c) Tobey Enterprises 2023"
 pythoncopyright = "Copyright(c) Python Software Foundation"
 mscopyright = "Copyright(c) Microsoft Corporation 2006-2023"
 ntfourlogonsoundcopyright = "Copyright(c) Microsoft Corporation"
@@ -409,7 +409,7 @@ while True:
         else: opt = input(f"{current_user}@{hostName}: ")
         log(logfile, f" {sysusrname} {current_user_dir} Ran option: {opt}")
         if opt == "27": os.system("cls")
-        elif opt == "36": print("Utility Kernel 0.2.0-1.0.0\nCopyright (C) OR 2023")
+        elif opt == "36": print("Utility Kernel 0.2.0-1.0.0\nCopyright (C) TE 2023")
         elif opt == "37": os.system("ver")
  
         elif opt == "33":
@@ -423,7 +423,7 @@ while True:
         elif opt == "35":
           import tkinter
           window = tkinter.Tk()
-          tkinter.Label(window,text = "Copyight (C) O. Republic\n Copyright (C) Tobey Industries\n 2022-2023").pack()
+          tkinter.Label(window,text = "Copyight (C) Tobey Enterprises\n Copyright (C) Tobey Industries\n 2022-2023").pack()
           tkinter.Label(window,text="Shell Version: "+shellbuild).pack()
           tkinter.Label(window,text="Kernel Version: "+kernbuild).pack()
           tkinter.Label(window,text="Success Sound Copyright: "+ntfourlogonsoundcopyright).pack()
